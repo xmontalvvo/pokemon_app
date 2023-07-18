@@ -1,13 +1,14 @@
 const {Router} = require("express");
 const router = Router();
 
-const {getAllPokemons} = require('../controllers/pokemons');
+const {getPokemons, getPokemonId, postPokemons} = require('../controllers/pokemons');
 
-router.get('/pokemons', getAllPokemons); // ruta y (cb) <- con req, res
+router.get('/pokemons', getPokemons); // ruta y (cb) <- con req, res
+router.get('/pokemons/:id', getPokemonId);
 /*
-router.get('pokemons/:idPokemon', );
 router.get('/pokemons/?', );  // <- investigar como definir ruta por query
-router.post('/pokemons', );
 */
+router.post('/pokemons', postPokemons);
+
 
 module.exports = router;

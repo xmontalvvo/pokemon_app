@@ -4,40 +4,63 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
 
-  //! VERIFICAR TIPO DE DATOS QUE LLEGUEN UNA VEZ QUE AVANCE MAS EN EL PROYECTO
-  sequelize.define('Pokemon', { //* cambie pokemon por Pokemon
+  sequelize.define('pokemon', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
       allowNull: false,
-      unique: true // Puede ser ovbiada porque la primaryKey ya contiene esta propiedad
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true
     },
-    image: {
+    img: {
       type: DataTypes.STRING,
+      allowNull: false,
       isUrl: true // Verificar si la imagen llegara como url para mantener esta propiedad
     },
-    life: {
-      type: DataTypes.STRING
+    hp: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
-    stroke: {
-      type: DataTypes.STRING
+    attack: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
-    defending: {
-      type: DataTypes.STRING
+    defense: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     speed: {
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     height: {
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     weight: {
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    createInDb: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
     }
   }, { timestamps: true });
 };
+
+
+/*
+ID. *
+Nombre. *
+Imagen. *
+Vida. *
+Ataque. *
+Defensa. *
+Velocidad.
+Altura.
+Peso.
+*/

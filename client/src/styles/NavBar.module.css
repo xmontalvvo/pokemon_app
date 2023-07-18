@@ -1,0 +1,15 @@
+.nav{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(49, 50, 51);
+    padding: 15px;
+}
+
+.link{
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}

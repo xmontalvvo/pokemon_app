@@ -1,0 +1,46 @@
+.landing {
+    height: 100vh;
+    padding-top: 1rem;
+    background-image: url(https://i0.wp.com/cdn2.tfx.company/images/clickwallpapers-pokemon-4k-img9.jpg?w=880&ssl=1);
+    background-size: cover;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+.welcome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 250px;
+}
+
+.title {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: italic;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.h3 {
+    background-color: #58cc02;
+    box-shadow: 0 5px 0 #58a700;
+    padding: 5px;
+    border-radius: 4px;
+    cursor: auto;
+}
+
+.h3:active {
+    box-shadow: none;
+    transform: translateY(5px);
+}
+
+.link {
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
+}
