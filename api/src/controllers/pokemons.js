@@ -1,7 +1,7 @@
 const { Pokemon } = require('../db.js');
 const axios = require('axios');
 
-const URL = "https://pokeapi.co/api/v2/pokemon";
+const URL = "https://pokeapi.co/api/v2/pokemon?limit=151";  //Aqui se puede limitar hasta cuantos pokemons me trae por defecto
 const STATUS_OK = 200;
 const STATUS_ERROR = 500;
 
