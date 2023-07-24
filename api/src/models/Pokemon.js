@@ -6,8 +6,9 @@ module.exports = (sequelize) => {
 
   sequelize.define('pokemon', {
     id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.INTEGER,
+      //defaultValue: DataTypes.UUIDV4,
+      autoIncrement: true,
       primaryKey: true,
       allowNull: false,
     },
@@ -51,16 +52,3 @@ module.exports = (sequelize) => {
     }
   }, { timestamps: true });
 };
-
-
-/*
-ID. *
-Nombre. *
-Imagen. *
-Vida. *
-Ataque. *
-Defensa. *
-Velocidad.
-Altura.
-Peso.
-*/

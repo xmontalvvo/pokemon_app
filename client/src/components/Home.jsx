@@ -8,7 +8,7 @@ export default function Home({ pokemons }) {
       <div className={style.cards}>
         {
           pokemons.map((pokemon) => {
-            return <Card name={pokemon.name} id={pokemon.id} key={pokemon.name} image={pokemon.sprites.front_default} />
+            return <Card name={pokemon.name} id={pokemon.id} key={pokemon.name} image={pokemon.sprites.front_default} types={pokemon.types} />
           })
         }
       </div>
