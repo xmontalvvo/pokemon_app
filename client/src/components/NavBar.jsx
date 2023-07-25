@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import style from '../styles/NavBar.module.css'
 import SearchBar from './SearchBar'
 
-export default function NavBar() {
+export default function NavBar({onSearch}) {
   return (
     <div className={style.nav}>
       <img src='' alt="" />
@@ -13,7 +13,7 @@ export default function NavBar() {
       <Link className={style.link} to={"/create"}>
         <div>Crear Pokemon</div>
       </Link>
-      <SearchBar></SearchBar>
+      <SearchBar onSearch={onSearch}></SearchBar>
     </div>
   )
 }

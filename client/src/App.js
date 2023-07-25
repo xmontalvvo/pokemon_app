@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Routes, Route, useLocation } from "react-router-dom";
 import axios from 'axios'
-import { setPokemons } from './redux/actions'
+import { searchPokemon, setPokemons } from './redux/actions'
 import { useDispatch, useSelector } from 'react-redux';
 
 import NavBar from './components/NavBar.jsx'
@@ -16,20 +16,54 @@ export default function App() {
 
   const pokemons = useSelector(state => state.pokemons)
 
+  //console.log(":::::::: ",pokemons);
+
   const dispatch = useDispatch()
 
-  const getPokemonDetails = (pokemon) => {
-    return axios.get(pokemon.url)
-      .then(res => res.data)
-      .catch(err => console.log(err))
+//:::::::::::::REALIZAR LA BUSQUEDA POR NOMBRE:::::::::::::::::
+
+async function onSearch(name){
+  try {
+
+    const {data} = await axios(`http://localhost:3001/pokemon/?name=${name}`)
+    //console.log(data);
+    if (data.name) {
+      dispatch(searchPokemon(data))
+    } else {
+      window.alert("¡No hay personajes con ese nombre!")
+    }
+
+  } catch (error) {
+    console.log(error)
   }
+}
+
+//:::::::::::TRAER POKEMONS PARA EL HOME :::::::::::::::::::::
+  // const getPokemonDetails = (pokemon) => {
+  //   return axios.get(pokemon.url)
+  //     .then(res => res.data)
+  //     .catch(err => console.log(err))
+  // }
+
+  // useEffect(() => {
+  //   async function inEffect() {
+  //     try {
+  //       const { data } = await axios.get(`http://localhost:3001/pokemons`)
+  //       const pokemonsDetailed = await Promise.all(data.map(pokemon => getPokemonDetails(pokemon)))
+  //       dispatch(setPokemons(pokemonsDetailed))
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   inEffect()
+  // }, [dispatch])
 
   useEffect(() => {
-    async function inEffect() {
+    async function inEffect(){
       try {
         const { data } = await axios.get(`http://localhost:3001/pokemons`)
-        const pokemonsDetailed = await Promise.all(data.map(pokemon => getPokemonDetails(pokemon)))
-        dispatch(setPokemons(pokemonsDetailed))
+        //console.log(data);
+        dispatch(setPokemons(data))
       } catch (error) {
         console.log(error);
       }
@@ -42,7 +76,7 @@ export default function App() {
 
   return (
     <>
-      {pathname === "/" ? null : <NavBar />}
+      {pathname === "/" ? null : <NavBar onSearch={onSearch} />}
 
       <Routes>
         <Route path="/" element={<Landing />} />

@@ -9,11 +9,36 @@ const STATUS_OK = 200;
 const STATUS_ERROR = 500;
 
 // :::::::: OBTENER TODOS LOS POKEMONS DE API ::::::::::::::::::::::
-const getPokemons = async function (req, res) {
+const getPokemonsApi = async function (req, res) {
     try {
         const pokemons = await axios.get(`${URL}`);
         //res.status(STATUS_OK).json(pokemons.data.results)
-        return pokemons.data.results
+        //return pokemons.data.results
+
+        const results = pokemons.data.results
+        const pokemonsApi = await Promise.all(results.map(async (pokemon) => {
+            const pokemonInfo = await axios.get(pokemon.url)
+            const pokemonData = pokemonInfo.data
+
+            const pokemonObj = {
+                id: pokemonData.id,
+                name: pokemonData.name,
+                img: pokemonData.sprites.other.home.front_default,
+                type: pokemonData.types.map(e => e.type.name),
+                hp: pokemonData.stats[0].base_stat,
+                attack: pokemonData.stats[1].base_stat,
+                defense: pokemonData.stats[2].base_stat,
+                speed: pokemonData.stats[5].base_stat,
+                height: pokemonData.height,
+                weight: pokemonData.weight
+
+            }
+            return pokemonObj
+        }))
+
+        //res.status(STATUS_OK).json(pokemonsApi)
+        return pokemonsApi
+
     } catch (error) {
         res.status(STATUS_ERROR).end(error.message)
     }
@@ -21,9 +46,17 @@ const getPokemons = async function (req, res) {
 
 // :::::::: OBTENER TODOS LOS POKEMONS DE DB ::::::::::::::::::::::
 
-const getPokemosDB = async () => {
+const getPokemosDB = async (req, res) => {
     try {
-        const pokemonDb = await Pokemon.findAll()
+        const pokemonDb = await Pokemon.findAll({
+            include: [{
+                model: Type,
+                attributes: ['name'],
+                through: {
+                    attributes: [],
+                }
+            }]
+        })
 
         const objPokemon = pokemonDb.map((pokemon) => {
             return {
@@ -36,11 +69,13 @@ const getPokemosDB = async () => {
                 defense: pokemon.dataValues.defense,
                 speed: pokemon.dataValues.speed,
                 height: pokemon.dataValues.height,
-                weight: pokemon.dataValues.weight
+                weight: pokemon.dataValues.weight,
+                createInDb: pokemon.dataValues.createInDb
             }
         })
 
         return objPokemon
+        //res.status(STATUS_OK).json(objPokemon)
     } catch (error) {
         res.status(STATUS_ERROR).end(error.message)
     }
@@ -127,26 +162,6 @@ const getPokemonQuery = async (req, res) => {
 
 // :::::::::::::RUTA DE PRUEBA :::::::::::::::::::::::::
 
-// const testRoute = async (req, res) => {
-
-//     const { name } = req.query
-//     const toLowerName = name.toLowerCase()
-//     const searchDbName = await Pokemon.findOne({
-//         where: {
-//             name: { [Op.iLike]: `%${toLowerName}%` },
-//         }
-//     });
-
-//     const dataResultDb = searchDbName.dataValues
-
-//     if (dataResultDb != "") {
-//         console.log("Exito! Estos son los datos: ")
-//     }
-
-//     res.status(STATUS_OK).json(dataResultDb)
-
-// }
-
 // :::::::::::::::::: POST DE POKEMONS :::::::::::::::::::
 const postPokemons = async function (req, res) {
     try {
@@ -164,8 +179,11 @@ const postPokemons = async function (req, res) {
         const thePokemon = await newPokemon.addTypes(theTypes)
         const relationPokemonType = await Pokemon.findOne({
             where: { id: newPokemon.id },
-            include: [{ model: Type, attributes: ['name'], through: { attributes: [] } }]
+            include: [{ model: Type, attributes: ["name"], through: { attributes: [] } }]
         })
+
+        //typesNames = relationPokemonType.types.map((type) => type.get('name'))
+        //console.log(typesNames)
 
         res.status(STATUS_OK).json(relationPokemonType)
     } catch (error) {
@@ -177,10 +195,10 @@ const postPokemons = async function (req, res) {
 
 const getAllPokemons = async function (req, res) {
     try {
-        const getPokemonsApi = await getPokemons()
+        const getPokemonsAp = await getPokemonsApi()
+        //console.log(getPokemonsApi)
         const getPokemonsDb = await getPokemosDB()
-        const allPokemons = [...getPokemonsApi, ...getPokemonsDb]
-        //console.log(allPokemons.length > 0);
+        const allPokemons = [...getPokemonsAp, ...getPokemonsDb]
         res.status(STATUS_OK).json(allPokemons)
     } catch (error) {
         res.status(STATUS_ERROR).end(error.message)
@@ -192,6 +210,5 @@ module.exports = {
     postPokemons,
     getPokemonQuery,
     getAllPokemons,
-    getPokemosDB,
-    getPokemons
+    getPokemosDB
 }

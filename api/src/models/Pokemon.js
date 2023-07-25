@@ -6,9 +6,10 @@ module.exports = (sequelize) => {
 
   sequelize.define('pokemon', {
     id: {
-      type: DataTypes.INTEGER,
-      //defaultValue: DataTypes.UUIDV4,
-      autoIncrement: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV1,
+      //type: DataTypes.INTEGER,
+      //autoIncrement: true,
       primaryKey: true,
       allowNull: false,
     },
