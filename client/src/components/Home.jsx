@@ -4,6 +4,8 @@ import style from '../styles/Home.module.css'
 
 export default function Home({ pokemons }) {
 
+  //! Fijarse porque al hacer search de la DB no me trae los types
+
   return (
     <div>
       <div className={style.cards}>

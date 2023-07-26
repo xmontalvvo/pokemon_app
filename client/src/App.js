@@ -20,46 +20,47 @@ export default function App() {
 
   const dispatch = useDispatch()
 
-//:::::::::::::REALIZAR LA BUSQUEDA POR NOMBRE:::::::::::::::::
+  //:::::::::::::REALIZAR LA BUSQUEDA POR NOMBRE:::::::::::::::::
 
-async function onSearch(name){
-  try {
+  async function onSearch(name){
+    try {
 
-    const {data} = await axios(`http://localhost:3001/pokemon/?name=${name}`)
-    //console.log(data);
-    if (data.name) {
-      dispatch(searchPokemon(data))
-    } else {
-      window.alert("¡No hay personajes con ese nombre!")
+      const {data} = await axios(`http://localhost:3001/pokemon/?name=${name}`)
+      //console.log(data.name);
+      if (data.name) {
+        dispatch(searchPokemon(data))
+      } else {
+        window.alert("¡No hay personajes con ese nombre!")
+      }
+
+    } catch (error) {
+      console.log(error)
     }
-
-  } catch (error) {
-    console.log(error)
   }
-}
 
-//:::::::::::TRAER POKEMONS PARA EL HOME :::::::::::::::::::::
-  // const getPokemonDetails = (pokemon) => {
-  //   return axios.get(pokemon.url)
-  //     .then(res => res.data)
-  //     .catch(err => console.log(err))
-  // }
+  // const { name } = useParams()
+
+  // const pokemonsSearchName = useSelector(state => state.pokemonsByName)
+  // //console.log(pokemonsSearchName);
 
   // useEffect(() => {
-  //   async function inEffect() {
+  //   async function searcher() {
   //     try {
-  //       const { data } = await axios.get(`http://localhost:3001/pokemons`)
-  //       const pokemonsDetailed = await Promise.all(data.map(pokemon => getPokemonDetails(pokemon)))
-  //       dispatch(setPokemons(pokemonsDetailed))
+  //       const { data } = await axios.get(`http://localhost:3001/pokemon/?name=${name}`)
+  //       //console.log(":::::::EN APP ", data.name);
+  //       dispatch(searchPokemon(data))
+
   //     } catch (error) {
   //       console.log(error);
   //     }
   //   }
-  //   inEffect()
-  // }, [dispatch])
+  //   searcher()
+  // }, [dispatch, name])
+
+  //:::::::::::TRAER POKEMONS PARA EL HOME :::::::::::::::::::::
 
   useEffect(() => {
-    async function inEffect(){
+    async function inEffect() {
       try {
         const { data } = await axios.get(`http://localhost:3001/pokemons`)
         //console.log(data);

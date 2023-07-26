@@ -1,11 +1,17 @@
-import {SET_POKEMONS, SEARCH_POKEMON} from './actionType'
+import {SET_POKEMONS, SEARCH_POKEMON, RESET_PAGE} from './actionType'
 
 export const setPokemons = (payload) => ({
     type: SET_POKEMONS,
     payload: payload,
 })
 
-export const searchPokemon = (poke) => ({
+export const searchPokemon = (name) => ({
     type: SEARCH_POKEMON,
-    payload: poke
+    payload: name
 })
+
+export function resetPage () {
+    return {
+        type: RESET_PAGE,
+    }
+}

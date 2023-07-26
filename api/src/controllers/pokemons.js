@@ -98,7 +98,7 @@ const getPokemonId = async function (req, res) {
                     img: e.type.url
                 })
             }),*/
-            types: data.types.map(e => e.type.name).join(', '),
+            type: data.types.map(e => e.type.name).join(', '),
             hp: data.stats[0].base_stat,
             attack: data.stats[1].base_stat,
             defense: data.stats[2].base_stat,
@@ -144,7 +144,7 @@ const getPokemonQuery = async (req, res) => {
                 id: data.id,
                 name: data.name,
                 img: data.sprites.other.home.front_default,
-                types: data.types.map(e => e.type.name).join(', '),
+                type: data.types.map(e => e.type.name),
                 hp: data.stats[0].base_stat,
                 attack: data.stats[1].base_stat,
                 defense: data.stats[2].base_stat,

@@ -1,7 +1,8 @@
-import { SEARCH_POKEMON, SET_POKEMONS } from '../actions/actionType'
+import { RESET_PAGE, SEARCH_POKEMON, SET_POKEMONS } from '../actions/actionType'
 
 const initialState = {
     pokemons: [],
+    numPage: 1
 }
 
 export const pokemonsReducer = (state = initialState, action) => {
@@ -12,8 +13,10 @@ export const pokemonsReducer = (state = initialState, action) => {
 
         case SEARCH_POKEMON:
 
-            return {...state, pokemons: action.payload}
+            return {...state, pokemons: [action.payload]}
 
+        case RESET_PAGE:
+            return {...state, numPage: 1}
         default:
             return state
     }
