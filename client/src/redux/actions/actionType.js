@@ -1,3 +1,6 @@
 export const SET_POKEMONS = 'SET_POKEMONS'
 export const SEARCH_POKEMON = 'SEARCH_POKEMON'
 export const RESET_PAGE = 'RESET_PAGE'
+export const PREV = 'PREV'
+export const NEXT = 'NEXT'
+export const GET_TYPES = 'GET_TYPES'
