@@ -1,7 +1,8 @@
-import { CREATE_POKEMON, FILTER_ATTACK, FILTER_ORDER, FILTER_ORIGIN, FILTER_TYPES, GET_TYPES, NEXT, PREV, RESET_PAGE, SEARCH_POKEMON, SET_POKEMONS } from './actions/actionType'
+import { CREATE_POKEMON, FILTER_ATTACK, FILTER_ORDER, FILTER_ORIGIN, FILTER_TYPES, GET_POKEMON_ID, GET_TYPES, NEXT, PREV, RESET_PAGE, SEARCH_POKEMON, SET_POKEMONS } from './actions/actionType'
 
 const initialState = {
     pokemons: [],
+    pokemonId: [],
     types: [],
     pokemonsFilter: [],
     numPage: 1,
@@ -82,6 +83,9 @@ export default function reducer(state = initialState, action){
 
         case CREATE_POKEMON:
             return { ...state, pokemons: [...state.pokemonsFilter, action.payload] }
+
+        case GET_POKEMON_ID:
+            return { ...state, pokemonId: action.payload}
 
         default:
             return state

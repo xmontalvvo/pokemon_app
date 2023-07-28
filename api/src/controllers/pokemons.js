@@ -84,36 +84,43 @@ const getPokemosDB = async (req, res) => {
 // ::::::::::: OBTENER UN POKEMON POR ID ::::::::::::::::::::
 const getPokemonId = async function (req, res) {
     try {
+
+        const uuidRegex = /^[a-f\d]{8}-[a-f\d]{4}-[a-f\d]{4}-[a-f\d]{4}-[a-f\d]{12}$/i;
         const { id } = req.params
-        const apiData = await axios.get(`${URL}/${id}`)
-        const data = await apiData.data
 
-        const pokemonData = {
-            id: data.id,
-            name: data.name,
-            img: data.sprites.other.home.front_default,
-            /*types: data.types.map((e) => {
-                return ({
-                    name: e.type.name,
-                    img: e.type.url
-                })
-            }),*/
-            type: data.types.map(e => e.type.name).join(', '),
-            hp: data.stats[0].base_stat,
-            attack: data.stats[1].base_stat,
-            defense: data.stats[2].base_stat,
-            speed: data.stats[5].base_stat,
-            height: data.height,
-            weight: data.weight
+        if (!uuidRegex.test(id)) {
+            const apiData = await axios.get(`${URL}/${id}`)
+            const data = await apiData.data
+
+            const pokemonData = {
+                id: data.id,
+                name: data.name,
+                img: data.sprites.other.home.front_default,
+                type: data.types.map(e => e.type.name).join(', '),
+                hp: data.stats[0].base_stat,
+                attack: data.stats[1].base_stat,
+                defense: data.stats[2].base_stat,
+                speed: data.stats[5].base_stat,
+                height: data.height,
+                weight: data.weight
+            }
+            return res.status(STATUS_OK).json(pokemonData)
+        }else{
+            const findDb = await Pokemon.findByPk(id, {
+                include: [
+                    {
+                        model: Type,
+                        attributes: ['name'],
+                        through: {
+                            attributes: []
+                        }
+                    }
+                ]
+            })
+
+            return res.status(STATUS_OK).json(findDb)
         }
 
-        const findDb = await Pokemon.findByPk(id)
-
-        if (findDb) {
-            return res.status(STATUS_OK).json({ Pokemon: findDb })
-        } else {
-            return res.status(STATUS_ERROR).json(pokemonData)
-        }
     } catch (error) {
         res.status(STATUS_ERROR).end(error.message)
     }

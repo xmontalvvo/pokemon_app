@@ -1,25 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { getPokemonId } from '../redux/actions'
 
 import style from '../styles/Detail.module.css'
 
 export default function Detail() {
 
   const { id } = useParams()
-  const [pokemon, setPokemon] = useState({})
-  const { pokemons } = useSelector(state => state)
 
-    //! Crear otro estado en los reducers como en la APP de morty para que al recargar la pagina, no me de error de que no existe
-    //! al tener otro duplicado no sucederá ese error
+  const dispatch = useDispatch()
 
-    //TODO: Falta que me muestre el detalle de los que me trae por DB
-    
+  const pokemon = useSelector(state => state.pokemonId)
   useEffect(() => {
-    const poke = pokemons?.find((pk) => pk.id === Number(id))
-    if(poke) setPokemon(poke)
-    else window.alert("No existe personaje con ese ID")
-  }, [id])
+    dispatch(getPokemonId(id))
+  }, [dispatch, id])
 
   return (
     <div className={style.detail}>
@@ -33,7 +28,7 @@ export default function Detail() {
           <p>Velocidad: {pokemon.speed}</p>
           <p>Altura: {pokemon.height}</p>
           <p>Peso: {pokemon.weight}</p>
-          <p>{pokemon.type}</p>
+          {pokemon.createInDb ? <p>{pokemon.types.map(type => type.name).join(", ")}</p> : <p>{pokemon.type}</p>}
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { SET_POKEMONS, SEARCH_POKEMON, RESET_PAGE, PREV, NEXT, GET_TYPES, FILTER_TYPES, FILTER_ORIGIN, FILTER_ORDER, FILTER_ATTACK, CREATE_POKEMON } from './actionType'
+import { SET_POKEMONS, SEARCH_POKEMON, RESET_PAGE, PREV, NEXT, GET_TYPES, FILTER_TYPES, FILTER_ORIGIN, FILTER_ORDER, FILTER_ATTACK, CREATE_POKEMON, GET_POKEMON_ID } from './actionType'
 
 export const setPokemons = (payload) => ({
     type: SET_POKEMONS,
@@ -91,5 +91,20 @@ export function createPokemon(pokemon) {
             console.log(error);
         }
 
+    }
+}
+
+//::::::::::: OBTENER POKEMON POR ID :::::::::::::::
+export function getPokemonId(id) {
+    return async function (dispatch){
+        try {
+            const {data} = await axios.get(`http://localhost:3001/pokemons/${id}`)
+            return dispatch({
+                type: GET_POKEMON_ID,
+                payload: data
+            })
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
