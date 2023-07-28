@@ -6,7 +6,6 @@ export default function Card({name, id, image, type, types, createInDb}) {
 
   const typesApi = type?.map(type => type).join(', ')
   const typesDb = types?.map(types => types.name).join(', ')
-  //console.log(":::::: EN CARD:::::: ", types)
 
   return (
     <div className={style.card}>

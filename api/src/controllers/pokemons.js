@@ -136,7 +136,16 @@ const getPokemonQuery = async (req, res) => {
         const searchDbName = await Pokemon.findOne({
             where: {
                 name: { [Op.iLike]: `%${toLowerName}%` },
-            }
+            },
+            include: [
+                {
+                    model: Type,
+                    attributes: ['name'],
+                    through: {
+                        attributes: []
+                    }
+                }
+            ]
         });
 
         if (searchDbName !== null) {

@@ -26,6 +26,7 @@ export default function App() {
     try {
 
       const {data} = await axios(`http://localhost:3001/pokemon/?name=${name}`)
+      console.log(":::::::: IN APP ",data)
       if (data.name) {
         dispatch(searchPokemon(data))
       } else {
@@ -36,25 +37,6 @@ export default function App() {
       console.log(error)
     }
   }
-
-  // const { name } = useParams()
-
-  // const pokemonsSearchName = useSelector(state => state.pokemonsByName)
-  // //console.log(pokemonsSearchName);
-
-  // useEffect(() => {
-  //   async function searcher() {
-  //     try {
-  //       const { data } = await axios.get(`http://localhost:3001/pokemon/?name=${name}`)
-  //       //console.log(":::::::EN APP ", data.name);
-  //       dispatch(searchPokemon(data))
-
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   searcher()
-  // }, [dispatch, name])
 
   //:::::::::::TRAER POKEMONS PARA EL HOME :::::::::::::::::::::
 
