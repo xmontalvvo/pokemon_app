@@ -1,4 +1,5 @@
-import {SET_POKEMONS, SEARCH_POKEMON, RESET_PAGE, PREV, NEXT, GET_TYPES, FILTER_TYPES, FILTER_ORIGIN, FILTER_ORDER, FILTER_ATTACK} from './actionType'
+import axios from 'axios'
+import { SET_POKEMONS, SEARCH_POKEMON, RESET_PAGE, PREV, NEXT, GET_TYPES, FILTER_TYPES, FILTER_ORIGIN, FILTER_ORDER, FILTER_ATTACK, CREATE_POKEMON } from './actionType'
 
 export const setPokemons = (payload) => ({
     type: SET_POKEMONS,
@@ -11,20 +12,20 @@ export const searchPokemon = (name) => ({
     payload: name
 })
 
-export function resetPage () {
+export function resetPage() {
     return {
         type: RESET_PAGE,
     }
 }
 
 //::::::::::: PAGINADO :::::::::::::::::
-export function prev(){
+export function prev() {
     return {
         type: PREV,
     }
 }
 
-export function next(){
+export function next() {
     return {
         type: NEXT,
     }
@@ -32,14 +33,14 @@ export function next(){
 
 //:::::::::: FILTRADO POR TIPOS ::::::::::
 
-export function getTypes(payload){
+export function getTypes(payload) {
     return {
         type: GET_TYPES,
         payload: payload,
     }
 }
 
-export function filterTypes(filter){
+export function filterTypes(filter) {
     return {
         type: FILTER_TYPES,
         payload: filter,
@@ -48,7 +49,7 @@ export function filterTypes(filter){
 
 //::::::::: FILTRADO POR ORIGEN (API/DB) ::::::::::::
 
-export function filterOrigin(payload){
+export function filterOrigin(payload) {
     return {
         type: FILTER_ORIGIN,
         payload: payload,
@@ -57,7 +58,7 @@ export function filterOrigin(payload){
 
 //::::::::: FILTRADO POR ORDEN (A-Z/Z-A) ::::::::::::
 
-export function filterOrder(filteredOrder){
+export function filterOrder(filteredOrder) {
     return {
         type: FILTER_ORDER,
         payload: filteredOrder,
@@ -66,9 +67,29 @@ export function filterOrder(filteredOrder){
 
 //:::::::::: FILTRADO POR ATAQUE ::::::::::::::::::
 
-export function filterAttack(filterAttack){
+export function filterAttack(filterAttack) {
     return {
         type: FILTER_ATTACK,
         payload: filterAttack,
+    }
+}
+
+//:::::::::: CREAR POKEMON ::::::::::::::::::::::::
+
+export function createPokemon(pokemon) {
+
+    return async function (dispatch) {
+        try {
+
+            const { data } = await axios.post(`http://localhost:3001/pokemons`, pokemon)
+            return dispatch({
+                type: CREATE_POKEMON,
+                payload: data
+            })
+
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 }

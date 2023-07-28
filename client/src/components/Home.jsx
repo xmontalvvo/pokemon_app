@@ -7,7 +7,7 @@ import Filters from './Filters'
 
 export default function Home({ pokemons }) {
 
-  const {numPage} = useSelector(state => state)
+  const { numPage } = useSelector(state => state)
   const cantPokePerPage = 12
   let desde = (numPage - 1) * cantPokePerPage
   let hasta = numPage * cantPokePerPage
@@ -23,7 +23,7 @@ export default function Home({ pokemons }) {
         {
           viewPokemons?.map((pokemon) => {
             //console.log(":::::EN HOME:::::: ", pokemon.types)
-            return <Card name={pokemon.name} id={pokemon.id} key={pokemon.name} image={pokemon.img} type={pokemon.type} types={pokemon.createInDb ? pokemon.types : null } createInDb={pokemon.createInDb}/>
+            return <Card name={pokemon.name} id={pokemon.id} key={pokemon.name} image={pokemon.img} type={pokemon.type} types={pokemon.createInDb ? pokemon.types : null} createInDb={pokemon.createInDb} />
           })
         }
       </div>

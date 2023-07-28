@@ -26,7 +26,6 @@ export default function App() {
     try {
 
       const {data} = await axios(`http://localhost:3001/pokemon/?name=${name}`)
-      //console.log(data.name);
       if (data.name) {
         dispatch(searchPokemon(data))
       } else {
@@ -63,7 +62,6 @@ export default function App() {
     async function inEffect() {
       try {
         const { data } = await axios.get(`http://localhost:3001/pokemons`)
-        //console.log(data);
         dispatch(setPokemons(data))
       } catch (error) {
         console.log(error);
