@@ -19,8 +19,8 @@ export default function SearchBar({onSearch}) {
     setName("")
   }
   return (
-    <div>
-        <input className={style.inputSearch} type="text" onChange={handleChange} value={name} name="name" placeholder='Enter your search...' />
+    <div className={style.container}>
+        <input className={style.inputSearch} type="text" onChange={handleChange} value={name} name="name" placeholder='Enter your search...' autoComplete='off' />
         <button className={style.searchButton} onClick={add}>Search</button>
     </div>
   )

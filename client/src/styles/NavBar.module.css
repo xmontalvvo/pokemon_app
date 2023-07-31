@@ -1,11 +1,21 @@
 .header{
     width: 100%;
-    height: 50px;
+    height: 45px;
+    display: flex;
+    justify-content: space-between;
+    background-color: red;
+    background-color: #12263A;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    
+}
+
+.header img {
+    width: 80px;
+    padding-left: 20px;
 }
 
 .header nav{
     display: flex;
-    background-color: rgb(49, 50, 51);
     justify-content: flex-end;
     height: 45px;
 }
@@ -22,15 +32,16 @@
 
 .mainNavItem{
     margin-right: 20px;
+    font-size: large;
 }
 
 .link{
-    color: white;
+    color: #dcd156;
     text-decoration: none;
 }
 
 .link:hover{
-    color: yellow;
+    color: #FEEA00;
 }
 
 

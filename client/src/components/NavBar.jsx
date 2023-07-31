@@ -5,7 +5,13 @@ import SearchBar from './SearchBar'
 
 export default function NavBar({ onSearch }) {
   return (
-      <header className={style.header}>
+    <header className={style.header}>
+      <div>
+        <Link to={"/home"}>
+        <img src="https://1000marcas.net/wp-content/uploads/2020/01/Logo-Pokemon-1280x800.png" alt="Pokemon App" />
+        </Link>
+      </div>
+      <div>
         <nav>
           <ul className={style.mainNav}>
             <li className={style.mainNavItem}>
@@ -21,7 +27,8 @@ export default function NavBar({ onSearch }) {
             <li className={style.mainNavItem}><SearchBar className={style.search} onSearch={onSearch}></SearchBar></li>
           </ul>
         </nav>
-      </header>
+      </div>
+    </header>
   )
 }
 

@@ -78,7 +78,7 @@ export default function Form() {
   const handleSubmit = (event) => {
     event.preventDefault()
     dispatch(createPokemon(newPokemon))
-    alert('¡Pokemon creado con éxito!')
+    alert('¡Pokemon successfully created!')
     setNewPokemon({
       "name": "",
       "img": "",
@@ -94,8 +94,8 @@ export default function Form() {
   }
 
   return (
-    <div>
-      <div className={style.container}>
+    <div className={style.container}>
+      <div>
         <form className={style.form} onSubmit={handleSubmit}>
           <label htmlFor="name">
             <span>Name</span>
@@ -159,7 +159,7 @@ export default function Form() {
               }
             </select>
           </div>
-          {errors.key === true ? <button disabled>Create Pokemon</button> : <button type='submit'>Create Pokemon</button>}
+          {errors.key === true || errors.key === undefined ? <button disabled>Create Pokemon</button> : <button type='submit'>Create Pokemon</button>}
         </form>
       </div>
     </div>
