@@ -1,15 +1,36 @@
-.nav{
+.header{
+    width: 100%;
+    height: 50px;
+}
+
+.header nav{
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
     background-color: rgb(49, 50, 51);
-    padding: 15px;
+    justify-content: flex-end;
+    height: 45px;
+}
+
+
+.mainNav{
+    width: 550px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+
+.mainNavItem{
+    margin-right: 20px;
 }
 
 .link{
-    cursor: pointer;
-    text-decoration: none;
     color: white;
-    font-weight: bold;
+    text-decoration: none;
 }
+
+.link:hover{
+    color: yellow;
+}
+
+

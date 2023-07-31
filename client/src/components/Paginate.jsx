@@ -19,7 +19,7 @@ export default function Paginate({ numPage, cantPage }) {
                         </>
                     ) : (
                         <>
-                            <button onClick={() => dispatch(prev())}>ANTERIOR</button>
+                            <button onClick={() => dispatch(prev())}>PREV</button>
                             <p>{numPage - 1}</p>
                         </>
                     )
@@ -34,7 +34,7 @@ export default function Paginate({ numPage, cantPage }) {
                     ) : (
                         <>
                             <p>{numPage + 1}</p>
-                            <button onClick={() => dispatch(next())}>SIGUIENTE</button>
+                            <button onClick={() => dispatch(next())}>NEXT</button>
                         </>
                     )
                 }

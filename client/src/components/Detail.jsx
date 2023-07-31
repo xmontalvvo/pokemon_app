@@ -19,16 +19,17 @@ export default function Detail() {
   return (
     <div className={style.detail}>
       <div className={style.info}>
-        <p>ID: {id}</p>
-        <h2>Nombre: {pokemon.name}</h2>
         <img src={pokemon.img} alt={pokemon.name} />
         <div>
-          <p>Ataque: {pokemon.attack}</p>
-          <p>Defensa: {pokemon.defense}</p>
-          <p>Velocidad: {pokemon.speed}</p>
-          <p>Altura: {pokemon.height}</p>
-          <p>Peso: {pokemon.weight}</p>
-          {pokemon.createInDb ? <p>{pokemon.types.map(type => type.name).join(", ")}</p> : <p>{pokemon.type}</p>}
+          <p>ID: {id}</p>
+          <h2>Name: {pokemon.name}</h2>
+          <p>HP: {pokemon.hp}</p>
+          <p>Attack: {pokemon.attack}</p>
+          <p>Defense: {pokemon.defense}</p>
+          <p>Speed: {pokemon.speed}</p>
+          <p>Height: {pokemon.height}</p>
+          <p>Weight: {pokemon.weight}</p>
+          {pokemon.createInDb ? <p>TYPE: {pokemon.types.map(type => type.name).join(", ")}</p> : <p>TYPE: {pokemon.type}</p>}
         </div>
       </div>
     </div>

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { resetPage } from '../redux/actions'
 
+import style from '../styles/SearchBar.module.css'
+
 export default function SearchBar({onSearch}) {
 
   const [name, setName] = useState("")
@@ -18,8 +20,8 @@ export default function SearchBar({onSearch}) {
   }
   return (
     <div>
-        <input type="text" onChange={handleChange} value={name} name="name" placeholder='Ingresa tu busqueda...' />
-        <button onClick={add}>Buscar</button>
+        <input className={style.inputSearch} type="text" onChange={handleChange} value={name} name="name" placeholder='Enter your search...' />
+        <button className={style.searchButton} onClick={add}>Search</button>
     </div>
   )
 }

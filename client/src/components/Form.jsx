@@ -5,6 +5,8 @@ import { createPokemon, getTypes } from '../redux/actions'
 import { useNavigate } from 'react-router-dom'
 import validation from './validation'
 
+import style from '../styles/Form.module.css'
+
 export default function Form() {
 
   const dispatch = useDispatch()
@@ -93,55 +95,71 @@ export default function Form() {
 
   return (
     <div>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <label>Nombre</label>
-          <input key="name" type="text" name='name' value={newPokemon.name} onChange={handleChange} />
-          {errors.name ? <p>{errors.name}</p> : null}
-          <label>Imagen</label>
-          <input key="img" type="text" name='img' value={newPokemon.img} onChange={handleChange} />
-          {errors.img ? <p>{errors.img}</p> : null}
-          <label>Vida</label>
-          <input key="hp" type="text" name='hp' value={newPokemon.hp} onChange={handleChange} />
-          {errors.hp ? <p>{errors.hp}</p> : null}
-          <label>Ataque</label>
-          <input key="attack" type="text" name='attack' value={newPokemon.attack} onChange={handleChange} />
-          {errors.attack ? <p>{errors.attack}</p> : null}
-          <label>Defensa</label>
-          <input key="defense" type="text" name='defense' value={newPokemon.defense} onChange={handleChange} />
-          {errors.defense ? <p>{errors.defense}</p> : null}
-          <label>Velocidad</label>
-          <input key="speed" type="text" name='speed' value={newPokemon.speed} onChange={handleChange} />
-          {errors.speed ? <p>{errors.speed}</p> : null}
-          <label>Altura</label>
-          <input key="height" type="text" name='height' value={newPokemon.height} onChange={handleChange} />
-          {errors.height ? <p>{errors.height}</p> : null}
-          <label>Peso</label>
-          <input key="weight" type="text" name='weight' value={newPokemon.weight} onChange={handleChange} />
-          {errors.weight ? <p>{errors.weight}</p> : null}
-          <label >Type 1</label>
-          <select key='typesOne' name='types' onChange={handleChangeTypeOne}>
-            <option disabled selected>Selecciona los tipos</option>
-            {
-              types.map((type) => {
-                return (
-                  <option key={type.id} value={type.name}>{type.name}</option>
-                )
-              })
-            }
-          </select>
-          <label >Type 2</label>
-          <select key='typesTwo' name='types' onChange={handleChangeTypeTwo}>
-            <option disabled selected>Selecciona los tipos</option>
-            {
-              types.map((type) => {
-                return (
-                  <option key={type.id} value={type.name}>{type.name}</option>
-                )
-              })
-            }
-          </select>
-          {errors.key === true ? <button disabled>Guardar</button> : <button type='submit'>Guardar</button>}
+      <div className={style.container}>
+        <form className={style.form} onSubmit={handleSubmit}>
+          <label htmlFor="name">
+            <span>Name</span>
+            <input id="name" placeholder='Enter the name....' autoComplete='off' key="name" type="text" name='name' value={newPokemon.name} onChange={handleChange} />
+            {errors.name ? <p>{errors.name}</p> : null}
+          </label>
+          <label htmlFor='img'>
+            <span>Image</span>
+            <input id="img" placeholder='Enter the image....' autoComplete='off' key="img" type="text" name='img' value={newPokemon.img} onChange={handleChange} />
+            {errors.img ? <p>{errors.img}</p> : null}
+          </label>
+          <label htmlFor='hp'>
+            <span>HP</span>
+            <input id="hp" placeholder='Enter life....' autoComplete='off' key="hp" type="text" name='hp' value={newPokemon.hp} onChange={handleChange} />
+            {errors.hp ? <p>{errors.hp}</p> : null}
+          </label>
+          <label htmlFor='attack'>
+            <span>Attack</span>
+            <input id="attack" placeholder='Enter the attack....' autoComplete='off' key="attack" type="text" name='attack' value={newPokemon.attack} onChange={handleChange} />
+            {errors.attack ? <p>{errors.attack}</p> : null}
+          </label>
+          <label htmlFor='defense'>
+            <span>Defense</span>
+            <input id="defense" placeholder='Enter the defense....' autoComplete='off' key="defense" type="text" name='defense' value={newPokemon.defense} onChange={handleChange} />
+            {errors.defense ? <p>{errors.defense}</p> : null}
+          </label>
+          <label htmlFor='speed'>
+            <span>Speed</span>
+            <input id="speed" placeholder='Enter speed....' autoComplete='off' key="speed" type="text" name='speed' value={newPokemon.speed} onChange={handleChange} />
+            {errors.speed ? <p>{errors.speed}</p> : null}
+          </label>
+          <label htmlFor='height'>
+            <span>Height</span>
+            <input id="height" placeholder='Enter the height....' autoComplete='off' key="height" type="text" name='height' value={newPokemon.height} onChange={handleChange} />
+            {errors.height ? <p>{errors.height}</p> : null}
+          </label>
+          <label htmlFor='weight'>
+            <span>Weight</span>
+            <input id="weight" placeholder='Enter the weight....' autoComplete='off' key="weight" type="text" name='weight' value={newPokemon.weight} onChange={handleChange} />
+            {errors.weight ? <p>{errors.weight}</p> : null}
+          </label>
+          <div>
+            <select key='typesOne' name='types' onChange={handleChangeTypeOne}>
+              <option disabled selected>Select type 1</option>
+              {
+                types.map((type) => {
+                  return (
+                    <option key={type.id} value={type.name}>{type.name}</option>
+                  )
+                })
+              }
+            </select>
+            <select key='typesTwo' name='types' onChange={handleChangeTypeTwo}>
+              <option disabled selected>Select type 2</option>
+              {
+                types.map((type) => {
+                  return (
+                    <option key={type.id} value={type.name}>{type.name}</option>
+                  )
+                })
+              }
+            </select>
+          </div>
+          {errors.key === true ? <button disabled>Create Pokemon</button> : <button type='submit'>Create Pokemon</button>}
         </form>
       </div>
     </div>

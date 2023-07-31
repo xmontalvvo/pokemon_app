@@ -26,7 +26,7 @@ export default function App() {
     try {
 
       const {data} = await axios(`http://localhost:3001/pokemon/?name=${name}`)
-      console.log(":::::::: IN APP ",data)
+      //console.log(":::::::: IN APP ",data)
       if (data.name) {
         dispatch(searchPokemon(data))
       } else {
