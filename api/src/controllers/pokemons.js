@@ -135,7 +135,7 @@ const getPokemonQuery = async (req, res) => {
 
         const searchDbName = await Pokemon.findOne({
             where: {
-                name: { [Op.iLike]: `%${toLowerName}%` },
+                name: { [Op.iLike]: toLowerName },
             },
             include: [
                 {
@@ -148,9 +148,8 @@ const getPokemonQuery = async (req, res) => {
             ]
         });
 
-        if (searchDbName !== null) {
+        if (searchDbName) {
             const dbData = searchDbName.dataValues
-
             res.status(STATUS_OK).json(dbData)
         } else {
             const apiData = await axios.get(`${URL}/${toLowerName}`)
@@ -172,11 +171,9 @@ const getPokemonQuery = async (req, res) => {
         }
 
     } catch (error) {
-        res.status(STATUS_ERROR).end(error.message + "\nNo existe la busqueda del Pokemon que acabas de digitar en la API ni en la DB")
+        res.end(error.message)
     }
 }
-
-// :::::::::::::RUTA DE PRUEBA :::::::::::::::::::::::::
 
 // :::::::::::::::::: POST DE POKEMONS :::::::::::::::::::
 const postPokemons = async function (req, res) {
@@ -186,7 +183,7 @@ const postPokemons = async function (req, res) {
         const pokemon = { name, img, hp, attack, defense, speed, height, weight }
 
         if (types.length < 2) {
-            return res.status(STATUS_ERROR).json({ message: '¡ERROR! Debe estar relacionado con almenos dos tipos' })
+            return res.status(STATUS_ERROR).json({ message: 'Oh no! Must be related to at least two types.' })
         }
 
         const newPokemon = await Pokemon.create(pokemon)

@@ -8,8 +8,6 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV1,
-      //type: DataTypes.INTEGER,
-      //autoIncrement: true,
       primaryKey: true,
       allowNull: false,
     },
@@ -21,7 +19,7 @@ module.exports = (sequelize) => {
     img: {
       type: DataTypes.STRING,
       allowNull: false,
-      isUrl: true // Verificar si la imagen llegara como url para mantener esta propiedad
+      isUrl: true
     },
     hp: {
       type: DataTypes.INTEGER,

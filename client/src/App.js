@@ -26,13 +26,13 @@ export default function App() {
     try {
 
       const {data} = await axios(`http://localhost:3001/pokemon/?name=${name}`)
-      //console.log(":::::::: IN APP ",data)
-      if (data.name) {
-        dispatch(searchPokemon(data))
-      } else {
-        window.alert("¡No hay personajes con ese nombre!")
-      }
 
+      if (!data.name) {
+         alert("There are no characters with that name.")
+      } else {
+        dispatch(searchPokemon(data))
+      }
+      
     } catch (error) {
       console.log(error)
     }

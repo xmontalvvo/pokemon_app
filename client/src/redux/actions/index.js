@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { SET_POKEMONS, SEARCH_POKEMON, RESET_PAGE, PREV, NEXT, GET_TYPES, FILTER_TYPES, FILTER_ORIGIN, FILTER_ORDER, FILTER_ATTACK, CREATE_POKEMON, GET_POKEMON_ID } from './actionType'
+import { SET_POKEMONS, SEARCH_POKEMON, RESET_PAGE, PREV, NEXT, GET_TYPES, FILTER_TYPES, FILTER_ORIGIN, FILTER_ORDER, FILTER_ATTACK, CREATE_POKEMON, GET_POKEMON_ID, RELOAD_HOME } from './actionType'
 
 export const setPokemons = (payload) => ({
     type: SET_POKEMONS,
@@ -106,5 +106,13 @@ export function getPokemonId(id) {
         } catch (error) {
             console.log(error);
         }
+    }
+}
+
+//:::::::::::: RECARGAR HOME ::::::::::::::::::::::
+
+export function reloadHome(){
+    return {
+        type: RELOAD_HOME,
     }
 }
