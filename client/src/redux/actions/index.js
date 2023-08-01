@@ -81,7 +81,7 @@ export function createPokemon(pokemon) {
     return async function (dispatch) {
         try {
 
-            const { data } = await axios.post(`http://localhost:3001/pokemons`, pokemon)
+            const { data } = await axios.post(`/pokemons`, pokemon)
             return dispatch({
                 type: CREATE_POKEMON,
                 payload: data
@@ -98,7 +98,7 @@ export function createPokemon(pokemon) {
 export function getPokemonId(id) {
     return async function (dispatch){
         try {
-            const {data} = await axios.get(`http://localhost:3001/pokemons/${id}`)
+            const {data} = await axios.get(`/pokemons/${id}`)
             return dispatch({
                 type: GET_POKEMON_ID,
                 payload: data

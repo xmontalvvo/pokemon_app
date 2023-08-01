@@ -25,7 +25,7 @@ export default function App() {
   async function onSearch(name){
     try {
 
-      const {data} = await axios(`http://localhost:3001/pokemon/?name=${name}`)
+      const {data} = await axios(`/pokemon/?name=${name}`)
 
       if (!data.name) {
          alert("There are no characters with that name.")
@@ -44,7 +44,7 @@ export default function App() {
     async function inEffect() {
       try {
 
-        const { data } = await axios.get(`http://localhost:3001/pokemons`)
+        const { data } = await axios.get(`/pokemons`)
         dispatch(setPokemons(data))
         
       } catch (error) {

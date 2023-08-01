@@ -6,6 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import store from './redux/store';
+import axios from 'axios';
+
+//axios.defaults.baseURL = 'http://localhost:3001' // <-- descomentar para trabajar de forma local
+axios.defaults.baseURL = 'https://pokemonapp-production-7d6a.up.railway.app/'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

@@ -18,7 +18,7 @@ export default function Form() {
   useEffect(() => {
     async function inEffect() {
       try {
-        const { data } = await axios.get(`http://localhost:3001/types`)
+        const { data } = await axios.get(`/types`)
         dispatch(getTypes(data))
       } catch (error) {
         console.log(error);
