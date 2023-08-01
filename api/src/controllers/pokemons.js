@@ -12,8 +12,6 @@ const STATUS_ERROR = 500;
 const getPokemonsApi = async function (req, res) {
     try {
         const pokemons = await axios.get(`${URL}`);
-        //res.status(STATUS_OK).json(pokemons.data.results)
-        //return pokemons.data.results
 
         const results = pokemons.data.results
         const pokemonsApi = await Promise.all(results.map(async (pokemon) => {
@@ -31,12 +29,10 @@ const getPokemonsApi = async function (req, res) {
                 speed: pokemonData.stats[5].base_stat,
                 height: pokemonData.height,
                 weight: pokemonData.weight
-
             }
             return pokemonObj
         }))
 
-        //res.status(STATUS_OK).json(pokemonsApi)
         return pokemonsApi
 
     } catch (error) {
@@ -75,7 +71,7 @@ const getPokemosDB = async (req, res) => {
         })
 
         return objPokemon
-        //res.status(STATUS_OK).json(objPokemon)
+
     } catch (error) {
         res.status(STATUS_ERROR).end(error.message)
     }
@@ -195,9 +191,6 @@ const postPokemons = async function (req, res) {
             include: [{ model: Type, attributes: ["name"], through: { attributes: [] } }]
         })
 
-        //typesNames = relationPokemonType.types.map((type) => type.get('name'))
-        //console.log(typesNames)
-
         res.status(STATUS_OK).json(relationPokemonType)
     } catch (error) {
         res.status(STATUS_ERROR).end(error.message)
@@ -209,8 +202,8 @@ const postPokemons = async function (req, res) {
 const getAllPokemons = async function (req, res) {
     try {
         const getPokemonsAp = await getPokemonsApi()
-        //console.log(getPokemonsApi)
         const getPokemonsDb = await getPokemosDB()
+
         const allPokemons = [...getPokemonsAp, ...getPokemonsDb]
         res.status(STATUS_OK).json(allPokemons)
     } catch (error) {
@@ -222,6 +215,5 @@ module.exports = {
     getPokemonId,
     postPokemons,
     getPokemonQuery,
-    getAllPokemons,
-    getPokemosDB
+    getAllPokemons
 }

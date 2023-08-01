@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import style from '../styles/NavBar.module.css'
 import SearchBar from './SearchBar'
 import { useDispatch } from 'react-redux'
 import { reloadHome } from '../redux/actions'
+
+import style from '../styles/NavBar.module.css'
 
 export default function NavBar({ onSearch }) {
 
@@ -17,7 +18,7 @@ export default function NavBar({ onSearch }) {
     <header className={style.header}>
       <div>
         <Link to={"/home"} onClick={reload}>
-        <img src="https://1000marcas.net/wp-content/uploads/2020/01/Logo-Pokemon-1280x800.png" alt="Pokemon App" />
+          <img src="https://1000marcas.net/wp-content/uploads/2020/01/Logo-Pokemon-1280x800.png" alt="Pokemon App" />
         </Link>
       </div>
       <div>
@@ -45,18 +46,3 @@ export default function NavBar({ onSearch }) {
     </header>
   )
 }
-
-// export default function NavBar({onSearch}) {
-//   return (
-//     <div className={style.nav}>
-//       <img src='' alt="" />
-//       <Link className={style.link} to={"/home"}>
-//         <div>Inicio</div>
-//       </Link>
-//       <Link className={style.link} to={"/create"}>
-//         <div>Crear Pokemon</div>
-//       </Link>
-//       <SearchBar onSearch={onSearch}></SearchBar>
-//     </div>
-//   )
-// }

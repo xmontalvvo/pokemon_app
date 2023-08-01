@@ -159,7 +159,7 @@ export default function Form() {
               }
             </select>
           </div>
-          {errors.key === true || errors.key === undefined ? <button disabled>Create Pokemon</button> : <button type='submit'>Create Pokemon</button>}
+          {errors.key === true || errors.key === undefined ? <button style={{backgroundColor: "#817f7f"}} disabled>Create Pokemon</button> : <button type='submit'>Create Pokemon</button>}
         </form>
       </div>
     </div>

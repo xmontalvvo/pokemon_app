@@ -8,7 +8,7 @@ const initialState = {
     numPage: 1,
 }
 
-export default function reducer(state = initialState, action){
+export default function reducer(state = initialState, action) {
     switch (action.type) {
         case SET_POKEMONS:
 
@@ -16,7 +16,7 @@ export default function reducer(state = initialState, action){
 
         case RELOAD_HOME:
 
-            return {...state, pokemons: [...state.pokemonsFilter]}
+            return { ...state, pokemons: [...state.pokemonsFilter] }
 
         case SEARCH_POKEMON:
 
@@ -89,7 +89,7 @@ export default function reducer(state = initialState, action){
             return { ...state, pokemons: [...state.pokemonsFilter, action.payload] }
 
         case GET_POKEMON_ID:
-            return { ...state, pokemonId: action.payload}
+            return { ...state, pokemonId: action.payload }
 
         default:
             return state

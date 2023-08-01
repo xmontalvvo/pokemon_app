@@ -15,12 +15,10 @@ import ErrorNotFound from './components/ErrorNotFound';
 import About from './components/About';
 
 export default function App() {
+  
+  const dispatch = useDispatch()
 
   const pokemons = useSelector(state => state.pokemons)
-
-  //console.log(":::::::: ",pokemons);
-
-  const dispatch = useDispatch()
 
   //:::::::::::::REALIZAR LA BUSQUEDA POR NOMBRE:::::::::::::::::
 
@@ -45,15 +43,16 @@ export default function App() {
   useEffect(() => {
     async function inEffect() {
       try {
+
         const { data } = await axios.get(`http://localhost:3001/pokemons`)
         dispatch(setPokemons(data))
+        
       } catch (error) {
         console.log(error);
       }
     }
     inEffect()
   }, [dispatch])
-
 
   const { pathname } = useLocation();
 

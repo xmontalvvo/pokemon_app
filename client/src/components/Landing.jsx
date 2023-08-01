@@ -7,7 +7,6 @@ export default function Landing() {
     <div className={style.landing}>
       <div className={style.welcome}>
         <h1 className={style.title}>Welcome</h1>
-
         <h3 className={style.h3}><Link className={style.link} to="/home">Start Here</Link></h3>
       </div>
     </div>

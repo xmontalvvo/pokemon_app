@@ -56,7 +56,7 @@ export function filterOrigin(payload) {
     }
 }
 
-//::::::::: FILTRADO POR ORDEN (A-Z/Z-A) ::::::::::::
+//::::::::: FILTRADO POR ORDEN (DESC/ASC) ::::::::::::
 
 export function filterOrder(filteredOrder) {
     return {
