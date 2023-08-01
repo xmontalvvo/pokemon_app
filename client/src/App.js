@@ -11,6 +11,8 @@ import Detail from './components/Detail.jsx'
 import Form from './components/Form.jsx'
 
 import './App.css';
+import ErrorNotFound from './components/ErrorNotFound';
+import About from './components/About';
 
 export default function App() {
 
@@ -63,7 +65,9 @@ export default function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home pokemons={pokemons} />} />
         <Route path="/create" element={<Form />} />
+        <Route path="/about" element={<About />} />
         <Route path="/detail/:id" element={<Detail />} />
+        <Route path="*" element={<ErrorNotFound />} />
       </Routes>
     </>
   );

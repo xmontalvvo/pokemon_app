@@ -33,6 +33,11 @@ export default function NavBar({ onSearch }) {
                 <div>New</div>
               </Link>
             </li>
+            <li className={style.mainNavItem}>
+              <Link className={style.link} to={"/about"}>
+                <div>About</div>
+              </Link>
+            </li>
             <li className={style.mainNavItem}><SearchBar className={style.search} onSearch={onSearch}></SearchBar></li>
           </ul>
         </nav>
