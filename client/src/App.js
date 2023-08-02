@@ -3,16 +3,15 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import axios from 'axios'
 import { searchPokemon, setPokemons } from './redux/actions'
 import { useDispatch, useSelector } from 'react-redux';
-
 import NavBar from './components/NavBar.jsx'
 import Landing from './components/Landing.jsx'
 import Home from './components/Home.jsx';
 import Detail from './components/Detail.jsx'
 import Form from './components/Form.jsx'
-
-import './App.css';
 import ErrorNotFound from './components/ErrorNotFound';
 import About from './components/About';
+
+import './App.css';
 
 export default function App() {
   

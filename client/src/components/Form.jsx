@@ -15,6 +15,8 @@ export default function Form() {
   const types = useSelector(state => state.types)
   const pokemons = useSelector(state => state.pokemons)
 
+  //console.log(pokemons);
+
   useEffect(() => {
     async function inEffect() {
       try {
@@ -83,20 +85,29 @@ export default function Form() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    dispatch(createPokemon(newPokemon))
-    alert('¡Pokemon successfully created!')
-    setNewPokemon({
-      "name": "",
-      "img": "",
-      "types": ["", ""],
-      "hp": "",
-      "attack": "",
-      "defense": "",
-      "speed": "",
-      "height": "",
-      "weight": "",
-    })
-    navigate('/home')
+
+    const pokemonsNames = pokemons.map(pokemon => pokemon.name)
+
+    if (pokemonsNames.includes(newPokemon.name)) {
+      alert(`The pokemon with the name ${newPokemon.name} already exists.`)
+    } else {
+
+      dispatch(createPokemon(newPokemon))
+      alert('¡Pokemon successfully created!')
+      setNewPokemon({
+        "name": "",
+        "img": "",
+        "types": ["", ""],
+        "hp": "",
+        "attack": "",
+        "defense": "",
+        "speed": "",
+        "height": "",
+        "weight": "",
+      })
+      navigate('/home')
+
+    }
   }
 
   return (
