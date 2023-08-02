@@ -79,6 +79,11 @@ const validationErrors = (form) => {
         errors.key = true
     }
 
+    if(form.types.length < 2){
+        errors.types = "You must select at least two types."
+        errors.key = true
+    }
+
     return errors
 }
 

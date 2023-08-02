@@ -30,7 +30,7 @@ export default function Form() {
   const [newPokemon, setNewPokemon] = useState({
     "name": "",
     "img": "",
-    "types": ["", ""],
+    "types": [],
     "hp": "",
     "attack": "",
     "defense": "",
@@ -42,6 +42,7 @@ export default function Form() {
   const [errors, setErrors] = useState({
     "name": "",
     "img": "",
+    "types": "",
     "hp": "",
     "attack": "",
     "defense": "",
@@ -51,29 +52,34 @@ export default function Form() {
   })
 
   const handleChange = function (event) {
+    const { name, value } = event.target;
+    if (name === 'types') {
+      const typesOfPokemon = [...newPokemon.types]
+      const index = typesOfPokemon.indexOf(value)
 
+      if (index === -1) {
+        typesOfPokemon.push(value)
+      } else {
+        typesOfPokemon.splice(index, 1)
+      }
+      setNewPokemon({ ...newPokemon, types: typesOfPokemon })
+
+    } else {
+      setErrors(validation({
+        ...newPokemon,
+        [name]: value,
+        pokemons
+      }))
+      setNewPokemon({ ...newPokemon, [name]: value })
+    }
+  }
+
+  useEffect(() => {
     setErrors(validation({
       ...newPokemon,
-      [event.target.name]: event.target.value,
       pokemons
     }))
-    setNewPokemon({
-      ...newPokemon,
-      [event.target.name]: event.target.value
-    })
-  }
-
-  const handleChangeTypeOne = (e, index) => {
-    const typesOfPokemon = [...newPokemon.types]
-    typesOfPokemon[0] = e.target.value
-    setNewPokemon({ ...newPokemon, types: typesOfPokemon })
-  }
-
-  const handleChangeTypeTwo = (e, index) => {
-    const typesOfPokemon = [...newPokemon.types]
-    typesOfPokemon[1] = e.target.value
-    setNewPokemon({ ...newPokemon, types: typesOfPokemon })
-  }
+  }, [newPokemon, pokemons])
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -138,8 +144,8 @@ export default function Form() {
             {errors.weight ? <p>{errors.weight}</p> : null}
           </label>
           <div>
-            <select key='typesOne' name='types' onChange={handleChangeTypeOne}>
-              <option disabled selected>Select type 1</option>
+            <select key='types' name='types' onChange={handleChange}>
+              <option disabled selected>Select type</option>
               {
                 types.map((type) => {
                   return (
@@ -148,18 +154,16 @@ export default function Form() {
                 })
               }
             </select>
-            <select key='typesTwo' name='types' onChange={handleChangeTypeTwo}>
-              <option disabled selected>Select type 2</option>
-              {
-                types.map((type) => {
-                  return (
-                    <option key={type.id} value={type.name}>{type.name}</option>
-                  )
-                })
-              }
-            </select>
+            {errors.types ? <p>{errors.types}</p> : null}
           </div>
-          {errors.key === true || errors.key === undefined ? <button style={{backgroundColor: "#817f7f"}} disabled>Create Pokemon</button> : <button type='submit'>Create Pokemon</button>}
+          <div className={style.errorTypes}>
+            {
+              newPokemon.types.map((types, index) => {
+                return <h5 key={index}>{types}</h5>
+              })
+            }
+          </div>
+          {errors.key === true || errors.key === undefined ? <button style={{ backgroundColor: "#817f7f" }} disabled>Create Pokemon</button> : <button type='submit'>Create Pokemon</button>}
         </form>
       </div>
     </div>
