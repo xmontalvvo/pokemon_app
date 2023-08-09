@@ -67,9 +67,25 @@
     background-color: red;
 }
 
-.errorTypes {
+.containerTypes{
     display: flex;
 }
+
+.errorTypes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .errorTypes h5 {
-    margin-right: 10px;
+    margin: 0;
+    margin-right: 15px;
+}
+
+.errorTypes p {
+    margin: 0;
+    font-size: 12px;
+    padding: 3px;
+    cursor: pointer;
+    
 }

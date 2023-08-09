@@ -15,8 +15,6 @@ export default function Form() {
   const types = useSelector(state => state.types)
   const pokemons = useSelector(state => state.pokemons)
 
-  //console.log(pokemons);
-
   useEffect(() => {
     async function inEffect() {
       try {
@@ -55,24 +53,23 @@ export default function Form() {
 
   const handleChange = function (event) {
     const { name, value } = event.target;
+  
     if (name === 'types') {
-      const typesOfPokemon = [...newPokemon.types]
-      const index = typesOfPokemon.indexOf(value)
-
+      const typesOfPokemon = [...newPokemon.types];
+      const index = typesOfPokemon.indexOf(value);
+  
       if (index === -1) {
-        typesOfPokemon.push(value)
-      } else {
-        typesOfPokemon.splice(index, 1)
+        typesOfPokemon.push(value);
       }
-      setNewPokemon({ ...newPokemon, types: typesOfPokemon })
-
+  
+      setNewPokemon({ ...newPokemon, types: typesOfPokemon });
     } else {
       setErrors(validation({
         ...newPokemon,
         [name]: value,
         pokemons
-      }))
-      setNewPokemon({ ...newPokemon, [name]: value })
+      }));
+      setNewPokemon({ ...newPokemon, [name]: value });
     }
   }
 
@@ -126,32 +123,32 @@ export default function Form() {
           </label>
           <label htmlFor='hp'>
             <span>HP</span>
-            <input id="hp" placeholder='Enter life....' autoComplete='off' key="hp" type="text" name='hp' value={newPokemon.hp} onChange={handleChange} />
+            <input id="hp" placeholder='Enter life....' autoComplete='off' key="hp" type="number" name='hp' value={newPokemon.hp} onChange={handleChange} />
             {errors.hp ? <p>{errors.hp}</p> : null}
           </label>
           <label htmlFor='attack'>
             <span>Attack</span>
-            <input id="attack" placeholder='Enter the attack....' autoComplete='off' key="attack" type="text" name='attack' value={newPokemon.attack} onChange={handleChange} />
+            <input id="attack" placeholder='Enter the attack....' autoComplete='off' key="attack" type="number" name='attack' value={newPokemon.attack} onChange={handleChange} />
             {errors.attack ? <p>{errors.attack}</p> : null}
           </label>
           <label htmlFor='defense'>
             <span>Defense</span>
-            <input id="defense" placeholder='Enter the defense....' autoComplete='off' key="defense" type="text" name='defense' value={newPokemon.defense} onChange={handleChange} />
+            <input id="defense" placeholder='Enter the defense....' autoComplete='off' key="defense" type="number" name='defense' value={newPokemon.defense} onChange={handleChange} />
             {errors.defense ? <p>{errors.defense}</p> : null}
           </label>
           <label htmlFor='speed'>
             <span>Speed</span>
-            <input id="speed" placeholder='Enter speed....' autoComplete='off' key="speed" type="text" name='speed' value={newPokemon.speed} onChange={handleChange} />
+            <input id="speed" placeholder='Enter speed....' autoComplete='off' key="speed" type="number" name='speed' value={newPokemon.speed} onChange={handleChange} />
             {errors.speed ? <p>{errors.speed}</p> : null}
           </label>
           <label htmlFor='height'>
             <span>Height</span>
-            <input id="height" placeholder='Enter the height....' autoComplete='off' key="height" type="text" name='height' value={newPokemon.height} onChange={handleChange} />
+            <input id="height" placeholder='Enter the height....' autoComplete='off' key="height" type="number" name='height' value={newPokemon.height} onChange={handleChange} />
             {errors.height ? <p>{errors.height}</p> : null}
           </label>
           <label htmlFor='weight'>
             <span>Weight</span>
-            <input id="weight" placeholder='Enter the weight....' autoComplete='off' key="weight" type="text" name='weight' value={newPokemon.weight} onChange={handleChange} />
+            <input id="weight" placeholder='Enter the weight....' autoComplete='off' key="weight" type="number" name='weight' value={newPokemon.weight} onChange={handleChange} />
             {errors.weight ? <p>{errors.weight}</p> : null}
           </label>
           <div>
@@ -167,10 +164,10 @@ export default function Form() {
             </select>
             {errors.types ? <p>{errors.types}</p> : null}
           </div>
-          <div className={style.errorTypes}>
+          <div className={style.containerTypes}>
             {
               newPokemon.types.map((types, index) => {
-                return <h5 key={index}>{types}</h5>
+                return <div key={index} className={style.errorTypes}><p onClick={()=>{setNewPokemon({...newPokemon, types: newPokemon.types?.filter(type => type !== types)})}}>x</p><h5>{types}</h5></div>
               })
             }
           </div>

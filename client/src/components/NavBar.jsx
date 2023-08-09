@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import SearchBar from './SearchBar'
 import { useDispatch } from 'react-redux'
-import { reloadHome } from '../redux/actions'
+import { reloadHome, resetPage } from '../redux/actions'
 
 import style from '../styles/NavBar.module.css'
 
@@ -12,6 +12,7 @@ export default function NavBar({ onSearch }) {
 
   const reload = () => {
     dispatch(reloadHome())
+    dispatch(resetPage())
   }
 
   return (

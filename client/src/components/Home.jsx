@@ -17,13 +17,17 @@ export default function Home({ pokemons }) {
   return (
     <div>
       <Filters />
-      <div className={style.cards}>
-        {
-          viewPokemons?.map((pokemon) => {
-            return <Card name={pokemon.name} id={pokemon.id} key={pokemon.name} image={pokemon.img} type={pokemon.type} types={pokemon.createInDb ? pokemon.types : null} createInDb={pokemon.createInDb} />
-          })
-        }
-      </div>
+      {
+        viewPokemons.length === 0 ? <div className={style.cardsEmpty}><p>There are no pokemons with that data.</p></div> : (
+          <div className={style.cards}>
+            {
+              viewPokemons?.map((pokemon) => {
+                return <Card name={pokemon.name} id={pokemon.id} key={pokemon.name} image={pokemon.img} type={pokemon.type} types={pokemon.createInDb ? pokemon.types : null} createInDb={pokemon.createInDb} />
+              })
+            }
+          </div>
+        )
+      }
       <Paginate numPage={numPage} cantPage={cantPage} />
     </div>
   )

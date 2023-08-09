@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { filterAttack, filterOrder, filterOrigin, filterTypes, getTypes } from '../redux/actions'
+import { filterAttack, filterOrder, filterOrigin, filterTypes, getTypes, resetPage } from '../redux/actions'
 import axios from 'axios'
 
 import style from '../styles/Filters.module.css'
@@ -25,18 +25,22 @@ export default function Filters() {
 
     const handleChangeType = (event) => {
         dispatch(filterTypes(event.target.value))
+        dispatch(resetPage())
     }
 
     const handleChangeOrigin = (event) => {
         dispatch(filterOrigin(event.target.value))
+        dispatch(resetPage())
     }
 
     const handleChangeOrder = (event) => {
         dispatch(filterOrder(event.target.value))
+        dispatch(resetPage())
     }
 
     const handleChangeAttack = (event) => {
         dispatch(filterAttack(event.target.value))
+        dispatch(resetPage())
     }
 
     return (
@@ -64,6 +68,7 @@ export default function Filters() {
                 <div>
                     <p>Order</p>
                     <select name="filterOrder" onChange={handleChangeOrder}>
+                        <option value="" disabled selected>Select order</option>
                         <option value="DESC">Descending order</option>
                         <option value="ASC">Ascending order</option>
                     </select>
@@ -71,6 +76,7 @@ export default function Filters() {
                 <div>
                     <p>Attack</p>
                     <select name="filterAttack" onChange={handleChangeAttack}>
+                        <option value="" disabled selected>Select attack</option>
                         <option value="LOW">Minor to major</option>
                         <option value="HIGH">Major to minor</option>
                     </select>

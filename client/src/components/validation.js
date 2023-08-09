@@ -6,6 +6,7 @@ const validationErrors = (form) => {
 
     const regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/
     const regexUrl = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/
+    const regexNumber = /^[0-9]+$/
 
     //:::::::: NOMBRE :::::::::::::
     if (!form.name.trim()) {
@@ -32,6 +33,9 @@ const validationErrors = (form) => {
     } else if (form.hp <= 0 || form.hp >= 1000) {
         errors.hp = "The value must be greater than zero and less than 1000."
         errors.key = true
+    }else if (!regexNumber.test(form.hp)) {
+        errors.hp = "The value can only be a number."
+        errors.key = true
     }
 
     //::::::::::: ATAQUE ::::::::::::
@@ -40,6 +44,9 @@ const validationErrors = (form) => {
         errors.key = true
     } else if (form.attack <= 0 || form.attack >= 1000) {
         errors.attack = "The value must be greater than zero and less than 1000."
+        errors.key = true
+    }else if (!regexNumber.test(form.attack)) {
+        errors.attack = "The value can only be a number."
         errors.key = true
     }
 
@@ -50,6 +57,9 @@ const validationErrors = (form) => {
     } else if (form.defense <= 0 || form.defense >= 1000) {
         errors.defense = "The value must be greater than zero and less than 1000."
         errors.key = true
+    }else if (!regexNumber.test(form.defense)) {
+        errors.defense = "The value can only be a number."
+        errors.key = true
     }
 
     //:::::::::::: VELOCIDAD ::::::::::::
@@ -58,6 +68,9 @@ const validationErrors = (form) => {
         errors.key = true
     } else if (form.speed <= 0 || form.speed >= 1000) {
         errors.speed = "The value must be greater than zero and less than 1000."
+        errors.key = true
+    }else if (!regexNumber.test(form.speed)) {
+        errors.speed = "The value can only be a number."
         errors.key = true
     }
 
@@ -68,6 +81,9 @@ const validationErrors = (form) => {
     } else if (form.height <= 0 || form.height >= 1000) {
         errors.height = "The value must be greater than zero and less than 1000."
         errors.key = true
+    }else if (!regexNumber.test(form.height)) {
+        errors.height = "The value can only be a number."
+        errors.key = true
     }
 
     //:::::::::::::::: PESO :::::::::::::::::
@@ -76,6 +92,9 @@ const validationErrors = (form) => {
         errors.key = true
     } else if (form.weight <= 0 || form.weight >= 1000) {
         errors.weight = "The value must be greater than zero and less than 1000."
+        errors.key = true
+    }else if (!regexNumber.test(form.weight)) {
+        errors.weight = "The value can only be a number."
         errors.key = true
     }
 
